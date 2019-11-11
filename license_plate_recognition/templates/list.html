@@ -1,0 +1,9 @@
+<ul>
+    {% for occurence in occurences %}
+        <li>
+            {{ occurence }}<br>  
+            entered: {{ occurence.dateof_entry }}<br>
+            exited: {{ occurence.dateof_exit }}
+        </li>
+    {% endfor %}
+</ul>
