@@ -2,14 +2,14 @@
 
 RUN project
 
-`docker-compose up --build
+`docker-compose up --build`
 
 * be patient it takes a few minutes
 
 ------------------------------
 Old Run project:
 
-`docker build -t vehicle_monitor:v1 . `
+`docker build -t vehicle_monitor:v1 .  `
 
 `docker run -it -p 8000:8000 --rm vehicle_monitor:v1`
 
