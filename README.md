@@ -1,6 +1,13 @@
 # vehicle-monitor
 
-Run project:
+RUN project
+
+`docker-compose up --build
+
+* be patient it takes a few minutes
+
+------------------------------
+Old Run project:
 
 `docker build -t vehicle_monitor:v1 . `
 
