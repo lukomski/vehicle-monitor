@@ -1,6 +1,6 @@
 from django.core.files.uploadedfile import InMemoryUploadedFile
-#from openalpr import Alpr
 import subprocess
+import re
 
 class PlateReader():
 
@@ -8,32 +8,17 @@ class PlateReader():
     def read_license_plate(image: InMemoryUploadedFile):
         # file to bytes
         image.read()
-        ashCommand = "ls"
+        file_name = "samochod.jpg" # h786poj.jpg
+        # save image to file TODO - now use static file
+
+        # use aplr to read licence plate
+        bashCommand = "alpr /code/" + file_name
 		
-		#process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
-		# output, error = process.communicate()
-   #      alpr = Alpr("us")
-   #      if not alpr.is_loaded():
-   #        	print("Error loading OpenALPR")
-   #        	return ['', '', 'Error loading OpenALPR']
+        process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+        output, error = process.communicate()
+        print(output)
+        
+        m = re.search('-\s*(.*)\s*\\t\s*confidence', output.decode('utf-8'))
+        plate_text = m.group(1)
 
-   #      alpr.set_top_n(20)
- 		# alpr.set_default_region("md")
-   #      results = alpr.recognize_file("h786poj.jpg")
-
-   #      i = 0
- 		# for plate in results['results']:
-   #   		i += 1
-   #   		print("Plate #%d" % i)
-   #   		print("   %12s %12s" % ("Plate", "Confidence"))
-   #   		for candidate in plate['candidates']:
-   #       		prefix = "-"
-   #       		if candidate['matches_template']:
-   #           		prefix = "*"
-
-   #       		print("  %s %12s%12f" % (prefix, candidate['plate'], candidate['confidence']))
-
- 		# # Call when completely done to release memory
- 		# alpr.unload()
-
-        return ['1234', 'jeszcze jeden', 'EBE 12TC']
+        return ['1234', 'jeszcze jeden', plate_text]
