@@ -16,5 +16,4 @@ RUN apt install -y openalpr openalpr-daemon openalpr-utils libopenalpr-dev vim
 RUN ln -s /usr/share/openalpr/runtime_data/ocr/tessdata/lus.traineddata /usr/share/openalpr/runtime_data/ocr/lus.traineddata
 
 EXPOSE 8000
-ENTRYPOINT ["python", "manage.py"]
-CMD ["runserver", "0.0.0.0:8000"]
+CMD python manage.py test; python manage.py runserver 0.0.0.0:8000
