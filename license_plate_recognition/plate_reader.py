@@ -18,7 +18,6 @@ class PlateReader():
         output = get_command(f"alpr /code/{file_name}")
 
         m = re.search('-\s*(.*)\s*\\t\s*confidence', output.decode('utf-8'))
-        print(output.decode('utf-8'))
         plate_text = m.group(1)
 
         return [plate_text]

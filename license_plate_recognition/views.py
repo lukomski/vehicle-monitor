@@ -11,7 +11,7 @@ from .forms import ImageUploadForm
 import datetime
 
 def index(request):
-    return HttpResponse("SIEMA")
+    return HttpResponse("HOME")
 
 def all_occurences(request):
     occurences = CarOccurence.objects.all()
@@ -32,6 +32,7 @@ def present_cars(request):
 @csrf_exempt
 def add_occurence(request):
     if request.method == 'POST':
+        occurences = []
         for key, value in request.FILES.items():
             plates = PlateReader.read_license_plate(value)
             for plate in plates:
@@ -44,7 +45,6 @@ def add_occurence(request):
                 
                 if not started.first() is None:
                     occurence = started.first()
-                    print(occurence)
                     occurence.dateof_exit = datetime.datetime.utcnow().replace(tzinfo=utc)
                     occurence.save()
                     continue
@@ -52,9 +52,9 @@ def add_occurence(request):
                 print(type(occurences))
 
 
-        return HttpResponse("POSZŁO")
+        return HttpResponse(occurences)
     
-    return HttpResponse("NO I NIC")
+    return HttpResponse("Wrong method")
 
 def plate_reader(request):
     if request.method == 'POST':

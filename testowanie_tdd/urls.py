@@ -17,6 +17,6 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('lpr/', include('license_plate_recognition.urls')),
+    path('', include('license_plate_recognition.urls')),
     path('admin/', admin.site.urls),
 ]
